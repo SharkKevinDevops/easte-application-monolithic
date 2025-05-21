@@ -4,11 +4,10 @@ import Card from "@/components/Card";
 import Header from "@/components/Header";
 import Loading from "@/components/Loading";
 import {
-  useGetAuthUserQuery,
   useGetPropertiesQuery,
 } from "@/state/api-services/propertyApiService";
 
-import { useGetTenantQuery } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery, useGetTenantQuery } from "@/state/api-services/tenantApiService";
 import React from "react";
 
 const Favorites = () => {
