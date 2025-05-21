@@ -9,8 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService"
 import {
-  useGetAuthUserQuery,
   useGetLeasesQuery,
 } from "@/state/api-services/leaseApiService";
 import { useGetPropertyQuery } from "@/state/api-services/propertyApiService"
@@ -252,7 +252,7 @@ const Residence = () => {
     (lease) => lease.propertyId === property.id
   );
 
-  return (
+    return (
     <div className="dashboard-container">
       <div className="w-full mx-auto">
         <div className="md:flex gap-10">
@@ -261,10 +261,11 @@ const Residence = () => {
           )}
           <PaymentMethod />
         </div>
-        <BillingHistory payments={payments || []} />
+        {payments && <BillingHistory payments={payments} />}
       </div>
     </div>
   );
 };
+  
 
 export default Residence;

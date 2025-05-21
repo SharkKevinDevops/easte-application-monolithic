@@ -37,7 +37,7 @@ const Navbar = () => {
       className="fixed top-0 left-0 w-full z-50 shadow-xl"
       style={{ height: `${NAVBAR_HEIGHT}px` }}
     >
-      <div className="flex justify-between items-center w-full py-3 px-8 bg-primary-700 text-white">
+      <div className="flex justify-between items-center w-full py-3 px-8 bg-[#1A3C40] text-white">
         <div className="flex items-center gap-4 md:gap-6">
           {isDashboardPage && (
             <div className="md:hidden">
@@ -58,9 +58,9 @@ const Navbar = () => {
                 className="w-6 h-6"
               />
               <div className="text-xl font-bold">
-                RENT
+                REAL
                 <span className="text-secondary-500 font-light hover:!text-primary-300">
-                  IFUL
+                  HOME
                 </span>
               </div>
             </div>
@@ -95,7 +95,7 @@ const Navbar = () => {
         </div>
         {!isDashboardPage && (
           <p className="text-primary-200 hidden md:block">
-            Discover your perfect rental apartment with our advanced search
+            Your next home is just a search away!
           </p>
         )}
         <div className="flex items-center gap-5">
@@ -114,7 +114,7 @@ const Navbar = () => {
                 <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none">
                   <Avatar>
                     <AvatarImage src={authUser.userInfo?.image} />
-                    <AvatarFallback className="bg-primary-600">
+                    <AvatarFallback className="bg-[#4FA8A2]">
                       {authUser.userRole?.[0].toUpperCase()}
                     </AvatarFallback>
                   </Avatar>

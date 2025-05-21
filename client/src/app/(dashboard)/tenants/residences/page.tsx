@@ -3,13 +3,11 @@
 import Card from "@/components/Card";
 import Header from "@/components/Header";
 import Loading from "@/components/Loading";
-import {
-  useGetAuthUserQuery,
-} from "@/state/api-services/applicationApiService";
 import React from "react";
 import { 
   useGetCurrentResidencesQuery,
   useGetTenantQuery, 
+  useGetAuthUserQuery
 } from "@/state/api-services/tenantApiService";
 const Residences = () => {
   const { data: authUser } = useGetAuthUserQuery();
