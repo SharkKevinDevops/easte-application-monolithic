@@ -134,4 +134,3 @@ export const {
   useGetPropertiesQuery,
   useGetPropertyQuery,
 } = propertyApi;
-

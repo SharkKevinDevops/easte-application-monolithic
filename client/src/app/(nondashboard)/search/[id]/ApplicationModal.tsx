@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { ApplicationFormData, applicationSchema } from "@/lib/schemas";
-import { useCreateApplicationMutation, useGetAuthUserQuery } from "@/state/api";
+import { useCreateApplicationMutation, useGetAuthUserQuery } from "@/state/api-services/applicationApiService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";

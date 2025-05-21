@@ -1,4 +1,4 @@
-import { useGetPropertyQuery } from "@/state/api";
+import { useGetPropertyQuery } from "@/state/api-services/propertyApiService";
 import { MapPin, Star } from "lucide-react";
 import React from "react";
 

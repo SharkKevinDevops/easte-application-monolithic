@@ -5,11 +5,12 @@ import Header from "@/components/Header";
 import Loading from "@/components/Loading";
 import {
   useGetAuthUserQuery,
-  useGetCurrentResidencesQuery,
-  useGetTenantQuery,
-} from "@/state/api";
+} from "@/state/api-services/applicationApiService";
 import React from "react";
-
+import { 
+  useGetCurrentResidencesQuery,
+  useGetTenantQuery, 
+} from "@/state/api-services/tenantApiService";
 const Residences = () => {
   const { data: authUser } = useGetAuthUserQuery();
   const { data: tenant } = useGetTenantQuery(

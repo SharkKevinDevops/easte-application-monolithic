@@ -91,6 +91,16 @@ export const paymentApi = createApi({
       },
     }),
 
+        getPayments: build.query<Payment[], number>({
+      query: (leaseId) => `leases/${leaseId}/payments`,
+      providesTags: ["Payments"],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          error: "Failed to fetch payment info.",
+        });
+      },
+    }),
+
 
   }),
 });
@@ -98,6 +108,6 @@ export const paymentApi = createApi({
 
 export const {
   useGetAuthUserQuery,
-  useCreatePaymentMutation
+  useCreatePaymentMutation,
+  useGetPaymentsQuery
 } = paymentApi;
-

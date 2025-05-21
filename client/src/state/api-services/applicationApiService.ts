@@ -13,7 +13,7 @@ import { FiltersState } from "..";
 
 export const applicationApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_LEASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_APP_URL,
     prepareHeaders: async (headers) => {
       const session = await fetchAuthSession();
       const { idToken } = session.tokens ?? {};
@@ -107,7 +107,7 @@ export const applicationApi = createApi({
     >({
       query: ({ applicationId, status }) => ({
         url: `applications/${applicationId}/status`,
-        method: "PATCH",
+        method: "PUT",
         body: { status },
       }),
       invalidatesTags: ["Applications", "Leases"],

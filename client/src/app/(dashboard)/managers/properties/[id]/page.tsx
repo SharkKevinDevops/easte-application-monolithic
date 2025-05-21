@@ -11,10 +11,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  useGetPaymentsQuery,
-  useGetPropertyLeasesQuery,
   useGetPropertyQuery,
-} from "@/state/api";
+} from "@/state/api-services/propertyApiService";
+
+import { useGetPropertyLeasesQuery } from "@/state/api-services/leaseApiService";
+
+import { useGetPaymentsQuery } from "@/state/api-services/paymentApiService";
 import { ArrowDownToLine, ArrowLeft, Check, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

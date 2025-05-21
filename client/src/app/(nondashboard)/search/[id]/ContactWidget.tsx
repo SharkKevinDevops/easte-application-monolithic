@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useGetAuthUserQuery } from "@/state/api";
+import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService";
 import { Phone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";

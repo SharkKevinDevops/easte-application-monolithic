@@ -6,8 +6,9 @@ import Loading from "@/components/Loading";
 import {
   useGetAuthUserQuery,
   useGetPropertiesQuery,
-  useGetTenantQuery,
-} from "@/state/api";
+} from "@/state/api-services/propertyApiService";
+
+import { useGetTenantQuery } from "@/state/api-services/tenantApiService";
 import React from "react";
 
 const Favorites = () => {

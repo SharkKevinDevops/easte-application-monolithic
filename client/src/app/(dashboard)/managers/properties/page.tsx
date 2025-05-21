@@ -3,7 +3,7 @@
 import Card from "@/components/Card";
 import Header from "@/components/Header";
 import Loading from "@/components/Loading";
-import { useGetAuthUserQuery, useGetManagerPropertiesQuery } from "@/state/api";
+import { useGetAuthUserQuery, useGetManagerPropertiesQuery } from "@/state/api-services/managerApiService";
 import React from "react";
 
 const Properties = () => {

@@ -12,9 +12,10 @@ import {
 import {
   useGetAuthUserQuery,
   useGetLeasesQuery,
-  useGetPaymentsQuery,
-  useGetPropertyQuery,
-} from "@/state/api";
+} from "@/state/api-services/leaseApiService";
+import { useGetPropertyQuery } from "@/state/api-services/propertyApiService"
+
+import { useGetPaymentsQuery } from "@/state/api-services/paymentApiService"
 import { Lease, Payment, Property } from "@/types/prismaTypes";
 import {
   ArrowDownToLineIcon,

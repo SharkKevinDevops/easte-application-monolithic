@@ -6,9 +6,9 @@ import Loading from "@/components/Loading";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   useGetApplicationsQuery,
-  useGetAuthUserQuery,
-  useUpdateApplicationStatusMutation,
-} from "@/state/api";
+} from "@/state/api-services/applicationApiService";
+
+import { useGetAuthUserQuery, useUpdateApplicationStatusMutation } from "@/state/api-services/managerApiService"
 import { CircleCheckBig, Download, File, Hospital } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -32,8 +32,8 @@ const Applications = () => {
   );
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation();
 
-  const handleStatusChange = async (id: number, status: string) => {
-    await updateApplicationStatus({ id, status });
+  const handleStatusChange = async ( applicationId: number, status: string) => {
+    await updateApplicationStatus({ applicationId, status });
   };
 
   if (isLoading) return <Loading />;

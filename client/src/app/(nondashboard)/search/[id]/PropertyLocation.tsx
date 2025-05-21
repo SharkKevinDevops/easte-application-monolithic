@@ -1,4 +1,4 @@
-import { useGetPropertyQuery } from "@/state/api";
+import { useGetPropertyQuery } from "@/state/api-services/propertyApiService";
 import { Compass, MapPin } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";

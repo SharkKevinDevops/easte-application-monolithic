@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AmenityIcons, HighlightIcons } from "@/lib/constants";
 import { formatEnumString } from "@/lib/utils";
-import { useGetPropertyQuery } from "@/state/api";
+import { useGetPropertyQuery } from "@/state/api-services/propertyApiService";
 import { HelpCircle } from "lucide-react";
 import React from "react";
 

@@ -1,10 +1,10 @@
 import {
   useAddFavoritePropertyMutation,
   useGetAuthUserQuery,
-  useGetPropertiesQuery,
   useGetTenantQuery,
   useRemoveFavoritePropertyMutation,
-} from "@/state/api";
+} from "@/state/api-services/tenantApiService";
+import { useGetPropertiesQuery } from "@/state/api-services/propertyApiService";
 import { useAppSelector } from "@/state/redux";
 import { Property } from "@/types/prismaTypes";
 import Card from "@/components/Card";

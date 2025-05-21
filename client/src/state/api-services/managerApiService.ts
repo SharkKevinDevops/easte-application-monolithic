@@ -130,6 +130,23 @@ export const managerApi = createApi({
       },
     }),
 
+        updateApplicationStatus: build.mutation<
+      Application & { lease?: Lease },
+      { applicationId: number; status: string }
+    >({
+      query: ({ applicationId, status }) => ({
+        url: `applications/${applicationId}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["Applications", "Leases"],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          success: "Application status updated successfully!",
+          error: "Failed to update application status.",
+        });
+      },
+    }),
 
 
   }),
@@ -141,5 +158,5 @@ export const {
   useUpdateManagerSettingsMutation,
   useGetManagerPropertiesQuery,
   useCreatePropertyMutation,
+  useUpdateApplicationStatusMutation
 } = managerApi;
-

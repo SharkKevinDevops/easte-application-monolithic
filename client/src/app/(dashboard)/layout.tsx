@@ -5,7 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import Sidebar from "@/components/AppSidebar";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import React, { useEffect, useState } from "react";
-import { useGetAuthUserQuery } from "@/state/api";
+import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService";
 import { usePathname, useRouter } from "next/navigation";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
