@@ -130,7 +130,6 @@ export const propertyApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useGetPropertiesQuery,
   useGetPropertyQuery,
 } = propertyApi;

@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
-import { useGetAuthUserQuery } from "@/state/api-services/applicationApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 

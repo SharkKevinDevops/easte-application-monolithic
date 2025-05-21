@@ -1,9 +1,9 @@
 import {
   useAddFavoritePropertyMutation,
-  useGetAuthUserQuery,
   useGetTenantQuery,
   useRemoveFavoritePropertyMutation,
 } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { useGetPropertiesQuery } from "@/state/api-services/propertyApiService";
 import { useAppSelector } from "@/state/redux";
 import { Property } from "@/types/prismaTypes";

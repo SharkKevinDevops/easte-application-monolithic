@@ -107,7 +107,6 @@ export const paymentApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useCreatePaymentMutation,
   useGetPaymentsQuery
 } = paymentApi;

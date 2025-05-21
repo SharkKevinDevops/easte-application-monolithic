@@ -7,8 +7,8 @@ import React from "react";
 import { 
   useGetCurrentResidencesQuery,
   useGetTenantQuery, 
-  useGetAuthUserQuery
 } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 const Residences = () => {
   const { data: authUser } = useGetAuthUserQuery();
   const { data: tenant } = useGetTenantQuery(

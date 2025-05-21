@@ -155,7 +155,6 @@ export const applicationApi = createApi({
 });
 
 export const {
-  useGetAuthUserQuery,
   useGetApplicationsQuery,
   useUpdateApplicationStatusMutation,
   useCreateApplicationMutation,

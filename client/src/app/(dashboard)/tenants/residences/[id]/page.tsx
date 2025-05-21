@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService"
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi"
 import {
   useGetLeasesQuery,
 } from "@/state/api-services/leaseApiService";

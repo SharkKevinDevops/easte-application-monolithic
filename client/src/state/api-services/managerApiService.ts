@@ -154,7 +154,6 @@ export const managerApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useUpdateManagerSettingsMutation,
   useGetManagerPropertiesQuery,
   useCreatePropertyMutation,

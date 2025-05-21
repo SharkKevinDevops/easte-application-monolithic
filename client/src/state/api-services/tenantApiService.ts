@@ -193,7 +193,6 @@ export const tenantApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useUpdateTenantSettingsMutation,
   useGetCurrentResidencesQuery,
   useGetTenantQuery,

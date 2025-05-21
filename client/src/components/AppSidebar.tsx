@@ -21,7 +21,7 @@ import {
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useGetAuthUserQuery } from "@/state/api-services/propertyApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 
 const AppSidebar = ({ userType }: AppSidebarProps) => {
 
