@@ -14,6 +14,7 @@ import { managerApi } from "./api-services/managerApiService";
 import { paymentApi } from "./api-services/paymentApiService";
 import { propertyApi } from "./api-services/propertyApiService";
 import { tenantApi } from "./api-services/tenantApiService";
+import { authApi } from "./api-services/authenSessionApi";
 
 /* REDUX STORE */
 // const rootReducers = combineReducers({
@@ -23,6 +24,7 @@ import { tenantApi } from "./api-services/tenantApiService";
 
 const rootReducer = combineReducers({
   global: globalReducer,
+  [authApi.reducerPath]: authApi.reducer,
   [applicationApi.reducerPath]: applicationApi.reducer,
   [propertyApi.reducerPath]: propertyApi.reducer,
   [leaseApi.reducerPath]: leaseApi.reducer,
@@ -51,7 +53,8 @@ export const makeStore = () => {
         .concat(leaseApi.middleware)
         .concat(tenantApi.middleware)
         .concat(managerApi.middleware)
-        .concat(paymentApi.middleware),
+        .concat(paymentApi.middleware)
+        .concat(authApi.middleware),
   });
 };
 

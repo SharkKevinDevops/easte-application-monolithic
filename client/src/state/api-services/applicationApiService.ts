@@ -99,14 +99,12 @@ export const applicationApi = createApi({
       },
     }),
 
-
-
     updateApplicationStatus: build.mutation<
       Application & { lease?: Lease },
-      { applicationId: number; status: string }
+      { id: number; status: string }
     >({
-      query: ({ applicationId, status }) => ({
-        url: `applications/${applicationId}/status`,
+      query: ({ id, status }) => ({
+        url: `applications/${id}/status`,
         method: "PUT",
         body: { status },
       }),
@@ -114,11 +112,10 @@ export const applicationApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
           success: "Application status updated successfully!",
-          error: "Failed to update application status.",
+          error: "Failed to update application settings.",
         });
       },
     }),
-
 
     createApplication: build.mutation<Application, Partial<Application>>({
       query: (body) => ({
@@ -134,28 +131,10 @@ export const applicationApi = createApi({
         });
       },
     }),
-
-    createPayment: build.mutation<Payment, Partial<Payment>>({
-      query: (body) => ({
-        url: `payments`,
-        method: "POST",
-        body: body,
-      }),
-      invalidatesTags: ["Payments"],
-      async onQueryStarted(_, { queryFulfilled }) {
-        await withToast(queryFulfilled, {
-          success: "Payment created successfully!",
-          error: "Failed to create payment.",
-        });
-      },
-    }),
-
-
   }),
 });
 
 export const {
-  useGetAuthUserQuery,
   useGetApplicationsQuery,
   useUpdateApplicationStatusMutation,
   useCreateApplicationMutation,

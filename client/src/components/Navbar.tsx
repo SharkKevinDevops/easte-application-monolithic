@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
-import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
 import { Bell, MessageCircle, Plus, Search } from "lucide-react";

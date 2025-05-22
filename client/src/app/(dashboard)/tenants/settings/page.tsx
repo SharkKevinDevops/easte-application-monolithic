@@ -2,10 +2,10 @@
 
 import SettingsForm from "@/components/SettingsForm";
 import {
-  useGetAuthUserQuery,
   useUpdateTenantSettingsMutation,
 } from "@/state/api-services/tenantApiService";
 import React from "react";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 
 const TenantSettings = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();

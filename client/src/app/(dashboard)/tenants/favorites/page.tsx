@@ -7,7 +7,8 @@ import {
   useGetPropertiesQuery,
 } from "@/state/api-services/propertyApiService";
 
-import { useGetAuthUserQuery, useGetTenantQuery } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
+import { useGetTenantQuery } from "@/state/api-services/tenantApiService";
 import React from "react";
 
 const Favorites = () => {

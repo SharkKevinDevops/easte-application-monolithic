@@ -107,7 +107,6 @@ export const leaseApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useGetLeasesQuery,
   useGetPropertyLeasesQuery,
 } = leaseApi;

@@ -1,6 +1,5 @@
 import {
   useAddFavoritePropertyMutation,
-  useGetAuthUserQuery,
   useGetTenantQuery,
   useRemoveFavoritePropertyMutation,
 } from "@/state/api-services/tenantApiService";
@@ -10,6 +9,7 @@ import { Property } from "@/types/prismaTypes";
 import Card from "@/components/Card";
 import React from "react";
 import CardCompact from "@/components/CardCompact";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 
 const Listings = () => {
   const { data: authUser } = useGetAuthUserQuery();

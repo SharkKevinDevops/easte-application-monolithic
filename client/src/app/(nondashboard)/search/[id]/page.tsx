@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAuthUserQuery } from "@/state/api-services/applicationApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import ImagePreviews from "./ImagePreviews";

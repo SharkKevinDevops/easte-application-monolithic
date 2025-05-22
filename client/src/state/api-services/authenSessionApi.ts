@@ -1,31 +1,24 @@
+import { cleanParams, createNewUserInDatabase, withToast } from "@/lib/utils";
+import {
+  Application,
+  Lease,
+  Manager,
+  Payment,
+  Property,
+  Tenant,
+} from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
-import { createNewUserInDatabase } from "@/lib/utils";
-import { Tenant, Manager } from "@/types/prismaTypes";
+import { FiltersState } from "..";
+import customBaseQuery from "@/lib/customBaseQuery"
 
-export const authSessionApi = createApi({
-  reducerPath: "authSessionApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_AUTH_URL,
-    prepareHeaders: async (headers) => {
-      const session = await fetchAuthSession();
-      const { idToken } = session.tokens ?? {};
-      if (idToken) {
-        headers.set("Authorization", `Bearer ${idToken}`);
-      }
-      return headers;
-    },
-  }),
+export const authApi = createApi({
+  baseQuery: customBaseQuery,
+  reducerPath: "authApi",
+  tagTypes: ["Managers", "Tenants", "Properties", "PropertyDetails", "Leases", "Payments", "Applications"],
   endpoints: (build) => ({
-    getAuthUser: build.query<
-      {
-        cognitoInfo: any;
-        userInfo: Tenant | Manager;
-        userRole: string;
-      },
-      void
-    >({
-      queryFn: async (_, _queryApi, _extraOptions, fetchWithBQ) => {
+    getAuthUser: build.query<User, void>({
+      queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
           const session = await fetchAuthSession();
           const { idToken } = session.tokens ?? {};
@@ -39,6 +32,7 @@ export const authSessionApi = createApi({
 
           let userDetailsResponse = await fetchWithBQ(endpoint);
 
+          // if user doesn't exist, create new user
           if (
             userDetailsResponse.error &&
             userDetailsResponse.error.status === 404
@@ -50,6 +44,14 @@ export const authSessionApi = createApi({
               fetchWithBQ
             );
           }
+            if (!userDetailsResponse.data) {
+              return {
+                error: {
+                  status: userDetailsResponse?.error?.status || "FETCH_ERROR",
+                  error: "No user data returned from backend",
+                },
+              };
+            }
 
           return {
             data: {
@@ -66,4 +68,7 @@ export const authSessionApi = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery } = authSessionApi;
+
+export const {
+  useGetAuthUserQuery,
+} = authApi;

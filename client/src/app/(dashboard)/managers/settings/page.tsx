@@ -2,9 +2,10 @@
 
 import SettingsForm from "@/components/SettingsForm";
 import {
-  useGetAuthUserQuery,
+
   useUpdateManagerSettingsMutation,
 } from "@/state/api-services/managerApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import React from "react";
 
 const ManagerSettings = () => {

@@ -77,7 +77,7 @@ export const tenantApi = createApi({
 
 
 
-    // tenant related endpoints
+// tenant related endpoints
     getTenant: build.query<Tenant, string>({
       query: (cognitoId) => `tenants/${cognitoId}`,
       providesTags: (result) => [{ type: "Tenants", id: result?.id }],
@@ -161,43 +161,14 @@ export const tenantApi = createApi({
         });
       },
     }),
-
-        // application related endpoints
-        getApplications: build.query<
-          Application[],
-          { userId?: string; userType?: string }
-        >({
-          query: (params) => {
-            const queryParams = new URLSearchParams();
-            if (params.userId) {
-              queryParams.append("userId", params.userId.toString());
-            }
-            if (params.userType) {
-              queryParams.append("userType", params.userType);
-            }
-    
-            return `applications?${queryParams.toString()}`;
-          },
-          providesTags: ["Applications"],
-          async onQueryStarted(_, { queryFulfilled }) {
-            await withToast(queryFulfilled, {
-              error: "Failed to fetch applications.",
-            });
-          },
-        }),
-
-
-
   }),
 });
 
 
 export const {
-  useGetAuthUserQuery,
   useUpdateTenantSettingsMutation,
   useGetCurrentResidencesQuery,
   useGetTenantQuery,
   useAddFavoritePropertyMutation,
   useRemoveFavoritePropertyMutation,
-  useGetApplicationsQuery
 } = tenantApi;

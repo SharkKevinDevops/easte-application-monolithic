@@ -9,7 +9,7 @@ import {
   useGetApplicationsQuery,
   useUpdateApplicationStatusMutation,
 } from "@/state/api-services/applicationApiService";
-import { useGetAuthUserQuery } from "@/state/api-services/tenantApiService";
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { CircleCheckBig, Download, File } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";

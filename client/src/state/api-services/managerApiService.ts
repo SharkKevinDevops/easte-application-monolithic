@@ -112,41 +112,23 @@ export const managerApi = createApi({
       },
     }),
 
-    createProperty: build.mutation<Property, FormData>({
-      query: (newProperty) => ({
-        url: `properties`,
-        method: "POST",
-        body: newProperty,
-      }),
-      invalidatesTags: (result) => [
-        { type: "Properties", id: "LIST" },
-        { type: "Managers", id: result?.manager?.id },
-      ],
-      async onQueryStarted(_, { queryFulfilled }) {
-        await withToast(queryFulfilled, {
-          success: "Property created successfully!",
-          error: "Failed to create property.",
-        });
-      },
-    }),
-
-        updateApplicationStatus: build.mutation<
-      Application & { lease?: Lease },
-      { applicationId: number; status: string }
-    >({
-      query: ({ applicationId, status }) => ({
-        url: `applications/${applicationId}/status`,
-        method: "PATCH",
-        body: { status },
-      }),
-      invalidatesTags: ["Applications", "Leases"],
-      async onQueryStarted(_, { queryFulfilled }) {
-        await withToast(queryFulfilled, {
-          success: "Application status updated successfully!",
-          error: "Failed to update application status.",
-        });
-      },
-    }),
+    // createProperty: build.mutation<Property, FormData>({
+    //   query: (newProperty) => ({
+    //     url: `properties`,
+    //     method: "POST",
+    //     body: newProperty,
+    //   }),
+    //   invalidatesTags: (result) => [
+    //     { type: "Properties", id: "LIST" },
+    //     { type: "Managers", id: result?.manager?.id },
+    //   ],
+    //   async onQueryStarted(_, { queryFulfilled }) {
+    //     await withToast(queryFulfilled, {
+    //       success: "Property created successfully!",
+    //       error: "Failed to create property.",
+    //     });
+    //   },
+    // }),
 
 
   }),
@@ -154,9 +136,7 @@ export const managerApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useUpdateManagerSettingsMutation,
   useGetManagerPropertiesQuery,
-  useCreatePropertyMutation,
-  useUpdateApplicationStatusMutation
+
 } = managerApi;

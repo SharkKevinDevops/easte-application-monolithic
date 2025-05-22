@@ -8,7 +8,8 @@ import {
   useGetApplicationsQuery,
 } from "@/state/api-services/applicationApiService";
 
-import { useGetAuthUserQuery, useUpdateApplicationStatusMutation } from "@/state/api-services/managerApiService"
+import { useUpdateApplicationStatusMutation } from "@/state/api-services/applicationApiService"
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
 import { CircleCheckBig, Download, File, Hospital } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";

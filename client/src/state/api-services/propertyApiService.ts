@@ -123,6 +123,25 @@ export const propertyApi = createApi({
       },
     }),
 
+    createProperty: build.mutation<Property, FormData>({
+      query: (newProperty) => ({
+        url: `properties`,
+        method: "POST",
+        body: newProperty,
+      }),
+      invalidatesTags: (result) => [
+        { type: "Properties", id: "LIST" },
+        { type: "Managers", id: result?.manager?.id },
+      ],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          success: "Property created successfully!",
+          error: "Failed to create property.",
+        });
+      },
+    }),
+
+
 
 
   }),
@@ -130,7 +149,7 @@ export const propertyApi = createApi({
 
 
 export const {
-  useGetAuthUserQuery,
   useGetPropertiesQuery,
   useGetPropertyQuery,
+  useCreatePropertyMutation,
 } = propertyApi;
