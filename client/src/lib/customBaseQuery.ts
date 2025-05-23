@@ -9,9 +9,11 @@ const customBaseQuery = async (args: any, api: any, extraOptions: any) => {
     const role = idToken?.payload["custom:role"];
 
     // Chọn baseURL theo role
-    let baseUrl = process.env.NEXT_PUBLIC_API_TENANT_URL;
-    if (role === "manager") {
-      baseUrl = process.env.NEXT_PUBLIC_API_MANAGER_URL;
+    let baseUrl = process.env.NEXT_PUBLIC_API_MANAGER_URL;
+    if (role === "tenant") {
+      baseUrl = process.env.NEXT_PUBLIC_API_TENANT_URL;
+    }else {
+      baseUrl = process.env.NEXT_PUBLIC_API_MANAGER_URL
     }
 
     const rawBaseQuery = fetchBaseQuery({

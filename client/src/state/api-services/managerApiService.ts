@@ -138,5 +138,4 @@ export const managerApi = createApi({
 export const {
   useUpdateManagerSettingsMutation,
   useGetManagerPropertiesQuery,
-
 } = managerApi;

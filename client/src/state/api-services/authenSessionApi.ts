@@ -31,7 +31,7 @@ export const authApi = createApi({
               : `/tenants/${user.userId}`;
 
           let userDetailsResponse = await fetchWithBQ(endpoint);
-
+          
           // if user doesn't exist, create new user
           if (
             userDetailsResponse.error &&
@@ -44,14 +44,6 @@ export const authApi = createApi({
               fetchWithBQ
             );
           }
-            if (!userDetailsResponse.data) {
-              return {
-                error: {
-                  status: userDetailsResponse?.error?.status || "FETCH_ERROR",
-                  error: "No user data returned from backend",
-                },
-              };
-            }
 
           return {
             data: {
