@@ -33,8 +33,8 @@ const Applications = () => {
   );
   const [updateApplicationStatus] = useUpdateApplicationStatusMutation();
 
-  const handleStatusChange = async ( applicationId: number, status: string) => {
-    await updateApplicationStatus({ applicationId, status });
+  const handleStatusChange = async ( id: number, status: string) => {
+    await updateApplicationStatus({ id, status });
   };
 
   if (isLoading) return <Loading />;

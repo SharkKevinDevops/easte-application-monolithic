@@ -112,7 +112,6 @@ export const managerApi = createApi({
       },
     }),
 
-
   }),
 });
 

@@ -35,13 +35,7 @@ app.use((0, morgan_1.default)("common"));
 app.get("/", (req, res) => {
     res.send("This is home route");
 });
-// app.use("/applications", applicationRoutes);
-// app.use("/properties", propertyRoutes);
 app.use("/leases", leaseRoutes_1.default);
-// app.use("/tenants", authMiddleware(["tenant"]), tenantRoutes); 
-// app.use("/managers", authMiddleware(["manager"]), managerRoutes);
-// app.use("/paypal", paypalRoutes);
-// Error handling middleware
 app.use((req, res, next) => {
     res.status(404).json({ message: "Route not found" });
 });
