@@ -87,15 +87,12 @@ model Property {
   locationId        Int
   managerCognitoId  String
 
-  location     Location      @relation(fields: [locationId], references: [id], onDelete: Cascade)
-  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId], onDelete: Cascade)
+  location     Location      @relation(fields: [locationId], references: [id])
+  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId])
   leases       Lease[]
   applications Application[]
   favoritedBy  Tenant[]      @relation("TenantFavorites")
   tenants      Tenant[]      @relation("TenantProperties")
-
-  @@index([locationId])
-  @@index([managerCognitoId])
 }
 
 model Manager {
@@ -109,12 +106,11 @@ model Manager {
 }
 
 model Tenant {
-  id               Int    @id @default(autoincrement())
-  cognitoId        String @unique
-  name             String
-  email            String
-  phoneNumber      String
-  stripeCustomerId String @unique
+  id          Int    @id @default(autoincrement())
+  cognitoId   String @unique
+  name        String
+  email       String
+  phoneNumber String
 
   properties   Property[]    @relation("TenantProperties")
   favorites    Property[]    @relation("TenantFavorites")
@@ -123,7 +119,7 @@ model Tenant {
 }
 
 model Location {
-  id          Int      @id @default(autoincrement())
+  id          Int                                   @id @default(autoincrement())
   address     String
   city        String
   state       String
@@ -146,13 +142,13 @@ model Application {
   message         String?
   leaseId         Int?              @unique
 
-  property  Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  tenant    Tenant     @relation(fields: [tenantCognitoId], references: [cognitoId], onDelete: Cascade)
-  lease     Lease?     @relation(fields: [leaseId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id])
+  tenant   Tenant   @relation(fields: [tenantCognitoId], references: [cognitoId])
+  lease    Lease?   @relation(fields: [leaseId], references: [id])
 }
 
 model Lease {
-  id              Int       @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   startDate       DateTime
   endDate         DateTime
   rent            Float
@@ -160,8 +156,8 @@ model Lease {
   propertyId      Int
   tenantCognitoId String
 
-  property    Property     @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  tenant      Tenant       @relation(fields: [tenantCognitoId], references: [cognitoId], onDelete: Cascade)
+  property    Property     @relation(fields: [propertyId], references: [id])
+  tenant      Tenant       @relation(fields: [tenantCognitoId], references: [cognitoId])
   application Application?
   payments    Payment[]
 }
@@ -173,9 +169,7 @@ model Payment {
   dueDate       DateTime
   paymentDate   DateTime
   paymentStatus PaymentStatus
-  currency      String        @default("USD")
-  paymentType   String        // e.g., "CreditCard", "BankTransfer"
   leaseId       Int
 
-  lease Lease @relation(fields: [leaseId], references: [id], onDelete: Cascade)
+  lease Lease @relation(fields: [leaseId], references: [id])
 }
