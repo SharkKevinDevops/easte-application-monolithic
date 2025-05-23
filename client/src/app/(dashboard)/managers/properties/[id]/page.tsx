@@ -13,10 +13,10 @@ import {
 import {
   useGetPropertyQuery,
 } from "@/state/api-services/propertyApiService";
-
-import { useGetPropertyLeasesQuery } from "@/state/api-services/leaseApiService";
-
 import { useGetPaymentsQuery } from "@/state/api-services/paymentApiService";
+
+import { useGetPropertyLeasesQuery } from "@/state/api-services/leaseApiService"
+
 import { ArrowDownToLine, ArrowLeft, Check, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

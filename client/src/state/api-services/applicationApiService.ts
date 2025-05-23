@@ -13,7 +13,7 @@ import { FiltersState } from "..";
 
 export const applicationApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_APP_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_AUTH_URL,
     prepareHeaders: async (headers) => {
       const session = await fetchAuthSession();
       const { idToken } = session.tokens ?? {};
