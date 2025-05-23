@@ -1,4 +1,5 @@
-import { cleanParams, createNewUserInDatabase, withToast } from "@/lib/utils";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import {
   Application,
   Lease,
@@ -7,9 +8,44 @@ import {
   Property,
   Tenant,
 } from "@/types/prismaTypes";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+import { createNewUserInDatabase } from "@/lib/utils"; // Đảm bảo đúng đường dẫn
 import { FiltersState } from "..";
+
+// 👉 Hàm phụ xử lý logic fetch hoặc tạo user
+const fetchOrCreateUser = async (
+  user: any,
+  idToken: any,
+  userRole: string,
+  fetchWithBQ: any
+) => {
+  const userId = idToken?.payload["sub"]; // 👉 Lấy userId chuẩn
+  const baseUrl =
+    userRole === "manager"
+      ? process.env.NEXT_PUBLIC_API_MANAGER_URL
+      : process.env.NEXT_PUBLIC_API_TENANT_URL;
+
+  const endpoint =
+    userRole === "manager"
+      ? `${baseUrl}/managers/${userId}`
+      : `${baseUrl}/tenants/${userId}`;
+
+  let userDetailsResponse = await fetchWithBQ(endpoint);
+
+  if (userDetailsResponse.error?.status === 404) {
+    userDetailsResponse = await createNewUserInDatabase(
+      user,
+      idToken,
+      userRole,
+      fetchWithBQ
+    );
+
+    if (userDetailsResponse.error) {
+      throw new Error("Failed to create user in database.");
+    }
+  }
+
+  return userDetailsResponse;
+};
 
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -34,62 +70,46 @@ export const authApi = createApi({
     "Applications",
   ],
   endpoints: (build) => ({
-  getAuthUser: build.query<User, void>({
-    queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
-      try {
-        const session = await fetchAuthSession();
-        const { idToken } = session.tokens ?? {};
-        const user = await getCurrentUser();
-        const userRole = idToken?.payload["custom:role"] as string;
+    getAuthUser: build.query<
+      {
+        cognitoInfo: any;
+        userInfo: Tenant | Manager;
+        userRole: string;
+      },
+      void
+    >({
+      queryFn: async (_, _queryApi, _extraOptions, fetchWithBQ) => {
+        try {
+          const session = await fetchAuthSession();
+          const { idToken } = session.tokens ?? {};
+          const user = await getCurrentUser();
+          const userRole = idToken?.payload["custom:role"] as string;
 
-        // 👉 Chọn base URL theo role
-        const baseUrl =
-          userRole === "manager"
-            ? process.env.NEXT_PUBLIC_API_MANAGER_URL // gọi tới application service
-            : process.env.NEXT_PUBLIC_API_TENANT_URL; // gọi tới tenant service
-
-        const endpoint =
-          userRole === "manager"
-            ? `${baseUrl}/managers/${user.userId}`
-            : `${baseUrl}/tenants/${user.userId}`;
-
-        // 👉 Gọi API chính thức
-        let userDetailsResponse = await fetchWithBQ(endpoint);
-
-        // 👉 Nếu chưa có user, tự động tạo
-        if (
-          userDetailsResponse.error &&
-          userDetailsResponse.error.status === 404
-        ) {
-          userDetailsResponse = await createNewUserInDatabase(
+          const userDetailsResponse = await fetchOrCreateUser(
             user,
             idToken,
             userRole,
             fetchWithBQ
           );
-        }
 
-        return {
-          data: {
-            cognitoInfo: { ...user },
-            userInfo: userDetailsResponse.data as Tenant | Manager,
-            userRole,
-          },
-        };
-      } catch (error: any) {
-        return {
-          error: {
-            status: "CUSTOM_ERROR",
-            error: error.message || "Could not fetch user data",
-          },
-        };
-      }
-    },
+          return {
+            data: {
+              cognitoInfo: { ...user },
+              userInfo: userDetailsResponse.data as Tenant | Manager,
+              userRole,
+            },
+          };
+        } catch (error: any) {
+          return {
+            error: {
+              status: "CUSTOM_ERROR",
+              error: error.message || "Could not fetch user data",
+            },
+          };
+        }
+      },
+    }),
   }),
-}),
 });
 
-
-export const {
-  useGetAuthUserQuery,
-} = authApi;
+export const { useGetAuthUserQuery } = authApi;
