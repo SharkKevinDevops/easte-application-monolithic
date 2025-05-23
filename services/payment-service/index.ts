@@ -5,7 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import { authMiddleware } from "./middleware/authMiddleware";
+import { authMiddleware } from "../middleware/authMiddleware";
 /* ROUTE IMPORT */
 import paypalRoutes from "./routes/paypalRoutes";
 

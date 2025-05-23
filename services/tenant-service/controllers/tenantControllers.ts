@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { wktToGeoJSON } from "@terraformer/wkt";
+import { v4 as uuid } from "uuid";
 
 const prisma = new PrismaClient();
 
@@ -39,6 +40,7 @@ export const createTenant = async (
         name,
         email,
         phoneNumber,
+        stripeCustomerId: uuid(),
       },
     });
 

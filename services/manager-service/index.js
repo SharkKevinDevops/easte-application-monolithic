@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
-const authMiddleware_1 = require("./middleware/authMiddleware");
+const authMiddleware_1 = require("../middleware/authMiddleware");
 /* ROUTE IMPORT */
 const managerRoutes_1 = __importDefault(require("./routes/managerRoutes"));
 /* CONFIGURATIONS */

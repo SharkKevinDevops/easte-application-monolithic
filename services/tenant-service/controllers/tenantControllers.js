@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeFavoriteProperty = exports.addFavoriteProperty = exports.getCurrentResidences = exports.updateTenant = exports.createTenant = exports.getTenant = void 0;
 const client_1 = require("@prisma/client");
 const wkt_1 = require("@terraformer/wkt");
+const uuid_1 = require("uuid");
 const prisma = new client_1.PrismaClient();
 const getTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -45,6 +46,7 @@ const createTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 name,
                 email,
                 phoneNumber,
+                stripeCustomerId: (0, uuid_1.v4)(),
             },
         });
         res.status(201).json(tenant);

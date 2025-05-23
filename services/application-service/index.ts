@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import { authMiddleware } from "./middleware/authMiddleware";
+import { authMiddleware } from "../middleware/authMiddleware";
 /* ROUTE IMPORT */
 import applicationRoutes from "./routes/applicationRoutes";
 
