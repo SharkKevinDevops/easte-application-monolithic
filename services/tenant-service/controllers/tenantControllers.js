@@ -38,21 +38,37 @@ const getTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getTenant = getTenant;
 const createTenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { cognitoId, name, email, phoneNumber } = req.body;
+        // Ép kiểu req.body thành CreateTenantBody
+        const { cognitoId, name, email, phoneNumber, stripeCustomerId } = req.body;
         const tenant = yield prisma.tenant.create({
             data: {
                 cognitoId,
                 name,
                 email,
                 phoneNumber,
+                stripeCustomerId: stripeCustomerId !== null && stripeCustomerId !== void 0 ? stripeCustomerId : "", // nếu null hoặc undefined thì dùng ""
             },
         });
+        console.log("Received stripeCustomerId:", stripeCustomerId, typeof stripeCustomerId);
+        const dataToCreate = {
+            cognitoId,
+            name,
+            email,
+            phoneNumber,
+        };
+        // Chỉ thêm stripeCustomerId nếu có giá trị hợp lệ (khác null/undefined)
+        if (stripeCustomerId != null) {
+            dataToCreate.stripeCustomerId = stripeCustomerId;
+        }
+        if (stripeCustomerId !== undefined) {
+            dataToCreate.stripeCustomerId = stripeCustomerId;
+        }
+        console.log("Data to create tenant:", dataToCreate);
         res.status(201).json(tenant);
     }
     catch (error) {
-        res
-            .status(500)
-            .json({ message: `Error creating tenant: ${error.message}` });
+        console.error("CREATE TENANT ERROR:", error);
+        res.status(500).json({ message: `Error creating tenant: ${error.message}` });
     }
 });
 exports.createTenant = createTenant;

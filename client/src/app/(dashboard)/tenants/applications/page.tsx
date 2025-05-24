@@ -9,7 +9,8 @@ import {
   useGetApplicationsQuery,
   useUpdateApplicationStatusMutation,
 } from "@/state/api-services/applicationApiService";
-import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi";
+
+import { useGetAuthUserQuery } from "@/state/api-services/authenSessionApi"
 import { CircleCheckBig, Download, File } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -45,7 +46,7 @@ const Applications = () => {
       if (paymentId && payerId && applicationIdParam) {
         try {
           await axios.post(
-            `${process.env.NEXT_PUBLIC_API_PAYMENT_URL}/paypal/execute-payment`,
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/paypal/execute-payment`,
             {
               paymentId,
               payerId,
@@ -65,7 +66,7 @@ const Applications = () => {
 
   const handlePayment = async (applicationId: number) => {
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_PAYMENT_URL}/paypal`, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/paypal`, {
         amount: 1000,
         currency: "USD",
         applicationId,
@@ -84,7 +85,7 @@ const Applications = () => {
     }
   };
 
-  const handleStatusChange = async ( id: number, status: string) => {
+  const handleStatusChange = async (id: number, status: string) => {
     await updateApplicationStatus({ id, status });
   };
 

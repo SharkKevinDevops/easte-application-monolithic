@@ -73,8 +73,22 @@ export const createNewUserInDatabase = async (
       name: user.username,
       email: idToken?.payload?.email || "",
       phoneNumber: "",
+      stripeCustomerId: null,
     },
   });
+
+  console.log("Creating tenant with data:", {
+  cognitoId: user.userId,
+  name: user.username,
+  email: idToken?.payload?.email || "",
+  phoneNumber: "",
+  stripeCustomerId: null,
+});
+
+if (createUserResponse.error) {
+  console.error("Error response from create tenant:", createUserResponse.error);
+  throw new Error("Failed to create user record");
+}
 
   if (createUserResponse.error) {
     throw new Error("Failed to create user record");

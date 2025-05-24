@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import {
   Application,
@@ -18,7 +18,7 @@ const fetchOrCreateUser = async (
   userRole: string,
   fetchWithBQ: any
 ) => {
-  const userId = idToken?.payload["sub"]; // 👉 Lấy userId chuẩn
+  const userId = idToken?.payload["sub"];
   const baseUrl =
     userRole === "manager"
       ? process.env.NEXT_PUBLIC_API_MANAGER_URL
@@ -29,17 +29,25 @@ const fetchOrCreateUser = async (
       ? `${baseUrl}/managers/${userId}`
       : `${baseUrl}/tenants/${userId}`;
 
+  console.log("[fetchOrCreateUser] userRole:", userRole);
+  console.log("[fetchOrCreateUser] endpoint:", endpoint);
+
   let userDetailsResponse = await fetchWithBQ(endpoint);
 
+  console.log("[fetchOrCreateUser] userDetailsResponse:", userDetailsResponse);
+
   if (userDetailsResponse.error?.status === 404) {
+    console.log("[fetchOrCreateUser] User not found, creating new user...");
     userDetailsResponse = await createNewUserInDatabase(
       user,
       idToken,
       userRole,
       fetchWithBQ
     );
+    console.log("[fetchOrCreateUser] createNewUserInDatabase response:", userDetailsResponse);
 
     if (userDetailsResponse.error) {
+      console.error("[fetchOrCreateUser] Failed to create user in database:", userDetailsResponse.error);
       throw new Error("Failed to create user in database.");
     }
   }
@@ -82,8 +90,19 @@ export const authApi = createApi({
         try {
           const session = await fetchAuthSession();
           const { idToken } = session.tokens ?? {};
+              if (!idToken) {
+            return {
+              error: {
+                status: 401,
+                data: "User is not authenticated",
+              } as FetchBaseQueryError,
+            };
+          }
           const user = await getCurrentUser();
           const userRole = idToken?.payload["custom:role"] as string;
+
+          console.log("[getAuthUser] userRole:", userRole);
+          console.log("[getAuthUser] user:", user);
 
           const userDetailsResponse = await fetchOrCreateUser(
             user,
@@ -91,6 +110,8 @@ export const authApi = createApi({
             userRole,
             fetchWithBQ
           );
+
+          console.log("[getAuthUser] userDetailsResponse:", userDetailsResponse);
 
           return {
             data: {
@@ -100,6 +121,7 @@ export const authApi = createApi({
             },
           };
         } catch (error: any) {
+          console.error("[getAuthUser] Error:", error);
           return {
             error: {
               status: "CUSTOM_ERROR",

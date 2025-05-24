@@ -4,6 +4,14 @@ import { wktToGeoJSON } from "@terraformer/wkt";
 
 const prisma = new PrismaClient();
 
+interface CreateTenantBody {
+  cognitoId: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  stripeCustomerId?: string; // dấu ? nghĩa là không bắt buộc
+}
+
 export const getTenant = async (req: Request, res: Response): Promise<void> => {
   try {
     const { cognitoId } = req.params;
@@ -26,12 +34,15 @@ export const getTenant = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+
+
 export const createTenant = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const { cognitoId, name, email, phoneNumber } = req.body;
+    // Ép kiểu req.body thành CreateTenantBody
+    const { cognitoId, name, email, phoneNumber, stripeCustomerId } = req.body;
 
     const tenant = await prisma.tenant.create({
       data: {
@@ -39,16 +50,43 @@ export const createTenant = async (
         name,
         email,
         phoneNumber,
+        stripeCustomerId: stripeCustomerId ?? "",  // nếu null hoặc undefined thì dùng ""
       },
     });
+    
+
+    console.log("Received stripeCustomerId:", stripeCustomerId, typeof stripeCustomerId);
+
+    const dataToCreate: any = {
+      cognitoId,
+      name,
+      email,
+      phoneNumber,
+    };
+
+    // Chỉ thêm stripeCustomerId nếu có giá trị hợp lệ (khác null/undefined)
+    if (stripeCustomerId != null) {
+      dataToCreate.stripeCustomerId = stripeCustomerId;
+    }
+
+
+    if (stripeCustomerId !== undefined) {
+      dataToCreate.stripeCustomerId = stripeCustomerId;
+    }
+
+  console.log("Data to create tenant:", dataToCreate);
+
+
+
 
     res.status(201).json(tenant);
   } catch (error: any) {
-    res
-      .status(500)
-      .json({ message: `Error creating tenant: ${error.message}` });
+    console.error("CREATE TENANT ERROR:", error);
+    res.status(500).json({ message: `Error creating tenant: ${error.message}` });
   }
 };
+
+
 
 export const updateTenant = async (
   req: Request,
@@ -66,6 +104,8 @@ export const updateTenant = async (
         phoneNumber,
       },
     });
+
+    
 
     res.json(updateTenant);
   } catch (error: any) {

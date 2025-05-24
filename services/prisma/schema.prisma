@@ -106,17 +106,19 @@ model Manager {
 }
 
 model Tenant {
-  id          Int    @id @default(autoincrement())
-  cognitoId   String @unique
-  name        String
-  email       String
-  phoneNumber String
+  id                Int    @id @default(autoincrement())
+  cognitoId         String @unique
+  name              String
+  email             String
+  phoneNumber       String
+  stripeCustomerId  String? @default("")  
 
   properties   Property[]    @relation("TenantProperties")
   favorites    Property[]    @relation("TenantFavorites")
   applications Application[]
   leases       Lease[]
 }
+
 
 model Location {
   id          Int                                   @id @default(autoincrement())

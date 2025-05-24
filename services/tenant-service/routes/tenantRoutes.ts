@@ -8,6 +8,7 @@ import {
   removeFavoriteProperty,
 } from "../controllers/tenantControllers";
 
+
 const router = express.Router();
 
 router.get("/:cognitoId", getTenant);

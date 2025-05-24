@@ -5,6 +5,7 @@
     "name": "Carol White",
     "email": "carol.white@example.com",
     "phoneNumber": "+1 (555) 555-6666",
+    "stripeCustomerId": "cus_1A2B3C4D5E6F",
     "properties": {
       "connect": [{ "id": 5 }, { "id": 6 }]
     }
@@ -15,6 +16,7 @@
     "name": "Bob Green",
     "email": "bob.green@example.com",
     "phoneNumber": "+1 (555) 333-4444",
+    "stripeCustomerId": "cus_9Z8Y7X6W5V4U",
     "favorites": {
       "connect": [{ "id": 2 }]
     }
@@ -25,6 +27,7 @@
     "name": "Alice Brown",
     "email": "alice.brown@example.com",
     "phoneNumber": "+1 (555) 111-2222",
+    "stripeCustomerId": null,
     "properties": {
       "connect": []
     },
@@ -38,6 +41,7 @@
     "name": "David Lee",
     "email": "david.lee@example.com",
     "phoneNumber": "+1 (555) 777-8888",
+    "stripeCustomerId": "cus_4E5F6G7H8I9J",
     "properties": {
       "connect": [{ "id": 4 }]
     },
@@ -51,6 +55,7 @@
     "name": "Emma Taylor",
     "email": "emma.taylor@example.com",
     "phoneNumber": "+1 (555) 999-0000",
+    "stripeCustomerId": "cus_5A6B7C8D9E0F",
     "properties": {
       "connect": [{ "id": 2 }, { "id": 9 }]
     },
@@ -64,6 +69,7 @@
     "name": "Frank Wilson",
     "email": "frank.wilson@example.com",
     "phoneNumber": "+1 (555) 222-3333",
+    "stripeCustomerId": null,
     "properties": {
       "connect": [{ "id": 10 }]
     }
@@ -74,6 +80,7 @@
     "name": "Grace Miller",
     "email": "grace.miller@example.com",
     "phoneNumber": "+1 (555) 444-5555",
+    "stripeCustomerId": "cus_7G8H9I0J1K2L",
     "properties": {
       "connect": [{ "id": 6 }]
     },
@@ -87,6 +94,7 @@
     "name": "Henry Wilson",
     "email": "henry.wilson@example.com",
     "phoneNumber": "+1 (555) 444-5555",
+    "stripeCustomerId": "cus_8M9N0O1P2Q3R",
     "properties": {
       "connect": [{ "id": 3 }]
     }
@@ -97,6 +105,7 @@
     "name": "Isabella Garcia",
     "email": "isabella.garcia@example.com",
     "phoneNumber": "+1 (555) 666-7777",
+    "stripeCustomerId": "cus_9S0T1U2V3W4X",
     "properties": {
       "connect": [{ "id": 7 }, { "id": 8 }]
     },
@@ -110,6 +119,7 @@
     "name": "Jack Thompson",
     "email": "jack.thompson@example.com",
     "phoneNumber": "+1 (555) 888-9999",
+    "stripeCustomerId": "cus_0Y1Z2A3B4C5D",
     "properties": {
       "connect": [{ "id": 10 }]
     },
@@ -123,6 +133,7 @@
     "name": "Karen Martinez",
     "email": "karen.martinez@example.com",
     "phoneNumber": "+1 (555) 123-4567",
+    "stripeCustomerId": null,
     "properties": {
       "connect": [{ "id": 2 }]
     },
@@ -136,6 +147,7 @@
     "name": "Liam Johnson",
     "email": "liam.johnson@example.com",
     "phoneNumber": "+1 (555) 987-6543",
+    "stripeCustomerId": "cus_1E2F3G4H5I6J",
     "favorites": {
       "connect": [{ "id": 3 }, { "id": 6 }, { "id": 9 }]
     }
@@ -146,6 +158,7 @@
     "name": "Mia Rodriguez",
     "email": "mia.rodriguez@example.com",
     "phoneNumber": "+1 (555) 246-8135",
+    "stripeCustomerId": "cus_3K4L5M6N7O8P",
     "properties": {
       "connect": [{ "id": 4 }]
     }
@@ -156,6 +169,7 @@
     "name": "Noah Kim",
     "email": "noah.kim@example.com",
     "phoneNumber": "+1 (555) 369-2580",
+    "stripeCustomerId": null,
     "favorites": {
       "connect": [{ "id": 1 }, { "id": 10 }]
     }
@@ -166,6 +180,7 @@
     "name": "Olivia Chen",
     "email": "olivia.chen@example.com",
     "phoneNumber": "+1 (555) 159-7531",
+    "stripeCustomerId": "cus_6Q7R8S9T0U1V",
     "properties": {
       "connect": [{ "id": 5 }]
     },
