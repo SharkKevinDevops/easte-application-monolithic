@@ -62,8 +62,8 @@ const PaypalService = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                         },
                     ],
                     redirect_urls: {
-                        return_url: `http://localhost:3000/tenants/applications?applicationId=${req.body.applicationId}`,
-                        cancel_url: "http://localhost:3000/tenants/applications",
+                        return_url: `${process.env.API_RETURN}/tenants/applications?applicationId=${req.body.applicationId}`,
+                        cancel_url: `${process.env.API_RETURN}/tenants/applications`,
                     },
                 }),
             });

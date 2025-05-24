@@ -56,8 +56,8 @@ export const PaypalService = async (
                     },
                 ],
                 redirect_urls: {
-                    return_url: `http://localhost:3000/tenants/applications?applicationId=${req.body.applicationId}`,
-                    cancel_url: "http://localhost:3000/tenants/applications",
+                    return_url: `${process.env.API_RETURN}/tenants/applications?applicationId=${req.body.applicationId}`,
+                    cancel_url: `${process.env.API_RETURN}/tenants/applications`,
                 },
             }),
         });
@@ -114,4 +114,3 @@ export const ExecutePayment = async (req: Request, res: Response) => {
     res.status(500).json({ message: error.message });
   }
 };
- 
